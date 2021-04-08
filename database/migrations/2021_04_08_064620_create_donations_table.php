@@ -15,10 +15,7 @@ class CreateDonationsTable extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->nullable();
-            $table->bigInteger('amount');
-            $table->string('status')->default('pending');
+            $table->foreignId('order_id')->constrained();
             $table->timestamps();
         });
     }
