@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class OrderController extends Controller
         return $this->orderService = $orderService;
     }
 
-    public function store($request)
+    public function store(OrderRequest $request)
     {
         try {
             $data = $this->orderService->store($request);
