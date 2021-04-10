@@ -26,7 +26,7 @@ class OrderRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'nullable|email',
-            'amount' => 'required|number'
+            'amount' => 'required|integer'
         ];
     }
 }
