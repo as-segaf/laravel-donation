@@ -42,4 +42,9 @@ class OrderService
 
         return $order;
     }
+
+    public function updateStatus($status, $id)
+    {
+        return $this->orderRepository->updateStatus($status, $id);
+    }
 }
