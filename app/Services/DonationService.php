@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Interfaces\DonationRepositoryInterface;
-use Midtrans;
 
 class DonationService
 {

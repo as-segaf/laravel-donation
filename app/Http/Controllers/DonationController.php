@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\DonationService;
-use Midtrans;
 
 class DonationController extends Controller
 {
@@ -23,7 +22,11 @@ class DonationController extends Controller
 
     public function store($request)
     {
-        $data = $this->donationService->store($request);
+        try {
+            $data = $this->donationService->store($request);
+        } catch (\Exception $exception) {
+            return redirect('/donation')->with('error', $exception->getMessage());
+        }
 
         return view('donation.pay', compact('data'));
     }
