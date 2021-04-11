@@ -12,12 +12,10 @@ class DonationRepository implements DonationRepositoryInterface
         return Donation::all();
     }
 
-    public function storeDonation($request)
+    public function storeDonation($order_id)
     {
         $data = Donation::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'amount' => $request->amount,
+            'order_id' => $order_id
         ]);
 
         if (!$data) {

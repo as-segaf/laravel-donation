@@ -6,5 +6,5 @@ interface DonationRepositoryInterface
 {
     public function getAllDonations();
 
-    public function storeDonation($request);
+    public function storeDonation($order_id);
 }
