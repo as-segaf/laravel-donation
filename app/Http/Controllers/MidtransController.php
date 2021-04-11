@@ -28,7 +28,7 @@ class MidtransController extends Controller
 
         return response()->json([
             'code' => 200,
-            'message' => 'Success update order status',
+            'message' => $data['message'],
             'data' => $data
         ]);
     }

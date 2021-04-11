@@ -2,18 +2,19 @@
 
 namespace App\Services;
 
+use App\Interfaces\DonationRepositoryInterface;
 use App\Interfaces\OrderRepositoryInterface;
-use App\Models\Donation;
-use App\Services\OrderService;
 use Midtrans;
 
 class MidtransService
 {
     protected $orderRepository;
+    protected $donationRepository;
 
-    public function __construct(OrderRepositoryInterface $orderRepository)
+    public function __construct(OrderRepositoryInterface $orderRepository,DonationRepositoryInterface $donationRepository)
     {
-        return $this->orderRepository = $orderRepository;
+        $this->orderRepository = $orderRepository;
+        $this->donationRepository = $donationRepository;
     }
 
     public function getNotification()
@@ -27,6 +28,14 @@ class MidtransService
         $order_id = $notification->order_id;
 
         $order = $this->orderRepository->updateStatus($transactionStatus, $order_id);
+        $order['message'] = 'Success update order status';
+
+        if ($order->status == 'settlement') {
+            $donation = $this->donationRepository->storeDonation($order->id);
+            $donation['message'] = 'Success, payment has been recevied and donation created';
+            
+            return $donation;
+        }
 
         return $order;
     }
