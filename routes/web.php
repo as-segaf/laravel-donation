@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\MidtransController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/donation');
 });
+
+Route::get('donation', [DonationController::class, 'index']);
+Route::post('order', [OrderController::class, 'store']);
+Route::post('notification', [MidtransController::class, 'getNotification']);
